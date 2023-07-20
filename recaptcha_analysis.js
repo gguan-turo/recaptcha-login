@@ -1,7 +1,8 @@
 import puppeteer from "puppeteer";
 
 // Grab Recaptcha version, sitekey, function, callback, and pageurl
-
+// function -> if function exist, we need to excute the functiion after the we update the recaptcha response input field.
+// sitekey, pageurl -> will be required fields in captcha solver
 (async () => {
   const browser = await puppeteer.launch({headless: false});
 
