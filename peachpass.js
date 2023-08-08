@@ -49,8 +49,12 @@ const solver = new Solver(process.env.solver_api); // Get from 1password 2captch
     timeout: 0,
   });
 
+  await page.waitForSelector("#account-current-id"); // Make sure is it successfully login
+
   const timeTaken = Date.now() - start;
   console.log("Total time taken : " + timeTaken + " milliseconds");
+
+  await page.waitForTimeout(20000);
 
   browser.close();
 })();
