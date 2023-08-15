@@ -8,17 +8,24 @@ import "dotenv/config";
 
   const page = await browser.newPage();
 
-  await page.goto("https://mypeachpass.com/user/login");
+  await page.goto("https://www.driveezmd.com/");
+
+  await page.waitForSelector("#disableGovDelivery");
+  await page.click("#disableGovDelivery");
 
   // Pass credential from onepass "Mypeachpass"
-  await page.waitForSelector("input[name=name]");
-  await page.type("input[name=name]", process.env.peachpass_username);
-  await page.waitForSelector("input[name=pass]");
-  await page.type("input[name=pass]", process.env.peachpass_password);
+  await page.waitForSelector("input#username");
+  await page.type("input#username", process.env.driverezmd_username);
+  await page.waitForSelector("input#password");
+  await page.type("input#password", process.env.driverezmd_password);
 
-  await page.waitForTimeout(5000);
+  //   await page.waitForTimeout(5000);
 
-  await page.click("input#edit-submit"); //peach
+  const setAnswer = await page.evaluate(() => {
+    document.getElementById("loginSubmit").removeAttribute("disabled");
+  });
+
+  await page.click("input#loginSubmit");
 
   await page.waitForTimeout(20000);
 
